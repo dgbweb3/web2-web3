@@ -4,6 +4,11 @@ import { ethers } from "ethers";
 
 const infuraUrl = `https://rinkeby.infura.io/v3/${process.env.INFURA_KEY}`;
 const provider = new ethers.providers.JsonRpcProvider(infuraUrl);
+console.log("Current block number on Infura: ", await provider.getBlockNumber());
+
+const localNode = `http://localhost:8545`;
+const localProvider = new ethers.providers.JsonRpcProvider(localNode);
+console.log("Current block number on Local Node: ", await localProvider.getBlockNumber());
 
 // 1.
 
@@ -35,18 +40,18 @@ const provider = new ethers.providers.JsonRpcProvider(infuraUrl);
 // );
 
 
-// const dgbweb3Balance = await provider.getBalance("dgbweb3.eth");
-// let sanfordBalance = await provider.getBalance("sanfordstout.eth");
+const dgbweb3Balance = await localProvider.getBalance("dgbweb3.eth");
+let sanfordBalance = await localProvider.getBalance("sanfordstout.eth");
 
-// sanfordBalance = sanfordBalance.add(ethers.utils.parseEther("5000"));
+sanfordBalance = sanfordBalance.add(ethers.utils.parseEther("5000"));
 
-// console.log("sanford balance", ethers.utils.formatEther(sanfordBalance));
-// console.log("dgbweb3 balance", ethers.utils.formatEther(dgbweb3Balance));
+console.log("sanford balance", ethers.utils.formatEther(sanfordBalance));
+console.log("dgbweb3 balance", ethers.utils.formatEther(dgbweb3Balance));
 
-// if(dgbweb3Balance.gt(sanfordBalance)) {
-//     console.log("Dgbweb3 has more ETH than Sanford");
-// } else {
-//     console.log("Sanford has more ETH than Dgbweb3");
-// }
+if(dgbweb3Balance.gt(sanfordBalance)) {
+    console.log("Dgbweb3 has more ETH than Sanford");
+} else {
+    console.log("Sanford has more ETH than Dgbweb3");
+}
 
 
